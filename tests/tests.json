@@ -1,0 +1,121 @@
+[
+  {
+    "name": "Search and filter the public cultural event catalog",
+    "sanity": true,
+    "viewport": "desktop",
+    "covers": [
+      "existing event catalog",
+      "search and filters",
+      "event detail preview",
+      "completed events hidden from active catalog",
+      "public archive for completed and cancelled events",
+      "cancelled event detail clearly labeled",
+      "catalog label distinguishes live organizer events from prototype samples",
+      "organizer can save venue coordinates",
+      "nearby search calculates distance for published events with valid coordinates",
+      "events without coordinates are excluded from distance results without being hidden from catalog",
+      "five-poster hero carousel",
+      "manual poster navigation",
+      "automatic poster rotation every six seconds",
+      "fixed-height hero clipping without overlap into the next section"
+    ],
+    "description": "Verifies the public homepage carousel, catalog and archive remain usable, including cancelled-event visibility.",
+    "steps": [
+      "Open the homepage and observe the active event poster",
+      "Select the third poster using its carousel indicator",
+      "Wait for the carousel to rotate automatically to the next poster",
+      "Verify the hero ends before the category section begins",
+      "Search for Batik",
+      "Open a matching event card and close the detail preview",
+      "Open Arsip acara from the navigation",
+      "Verify completed events and cancelled events appear in the archive with distinct labels, not in the active agenda"
+    ],
+    "expected": "The homepage carousel and catalog remain usable; completed events appear as Selesai in the archive, cancelled events appear as Dibatalkan with a clear notice in their detail view, and neither appears in the active agenda. Published events with valid coordinates can be ranked by distance, while events without coordinates remain available in the main catalog."
+  },
+  {
+    "name": "Sign in and create one organizer profile",
+    "viewport": "desktop",
+    "covers": [
+      "AppDeploy authentication",
+      "organizer profile creation",
+      "single organizer identity",
+      "profile privacy"
+    ],
+    "description": "Verifies an authenticated user can create one organizer identity that stays attached to the account.",
+    "steps": [
+      "Open Ajukan Acara",
+      "Sign in through AppDeploy authentication",
+      "Choose individual or organization",
+      "Save a named organizer profile",
+      "Reload the organizer dashboard"
+    ],
+    "expected": "The saved profile remains visible to the signed-in owner and the dashboard shows the same organizer identity."
+  },
+  {
+    "name": "Save a draft and submit an event for review",
+    "viewport": "desktop",
+    "covers": [
+      "multi-step event submission",
+      "automatic draft persistence after field changes",
+      "resume saved draft after page reload",
+      "poster and supporting document storage",
+      "mandatory poster",
+      "conditional supporting evidence",
+      "pending verification status"
+    ],
+    "description": "Verifies an organizer can submit a poster-backed event for admin review.",
+    "steps": [
+      "Open a new event form and enter the event title and details",
+      "Wait for the automatic save indicator to confirm the draft is saved",
+      "Upload a poster and optional responsibility document",
+      "Reload the page and reopen the saved draft from the organizer dashboard",
+      "Confirm the information and submit"
+    ],
+    "expected": "The draft and uploaded files remain available after reload, the organizer can continue editing the same event, and explicit submission changes it to pending until an authorized admin approves it."
+  },
+  {
+    "name": "Enforce role hierarchy on protected backend routes",
+    "viewport": "desktop",
+    "covers": [
+      "backend role resolution",
+      "superadmin-only admin management",
+      "admin event review permission",
+      "organizer API denial",
+      "superadmin bootstrap secret",
+      "admin audit log"
+    ],
+    "description": "Verifies superadmin, admin and organizer permissions are enforced by backend authorization rather than frontend visibility.",
+    "steps": [
+      "Sign in with the configured superadmin email and open the admin user management endpoint",
+      "Sign in with a granted admin account and attempt to open admin event review",
+      "Sign in with an organizer account and attempt to open admin event review and user management"
+    ],
+    "expected": "Superadmin can manage admin accounts and audit records; admin can review events but cannot manage admin accounts; organizer requests are rejected with 403."
+  },
+  {
+    "name": "Manage event cancellation with an audit trail on mobile",
+    "viewport": "mobile",
+    "covers": [
+      "organizer cancellation request with reason validation",
+      "organizer dashboard displays pending cancellation status and prevents duplicate requests",
+      "admin approval or rejection of cancellation request",
+      "admin direct cancellation with confirmation and reason",
+      "cancelled events removed from active catalog",
+      "cancelled event remains publicly discoverable with clear status",
+      "cancellation actions recorded in event history and admin audit log",
+      "responsive organizer dashboard"
+    ],
+    "description": "Verifies published events can be cancelled through organizer request or direct admin action without deleting their records.",
+    "steps": [
+      "Open the organizer dashboard at mobile width",
+      "Choose a published event and request cancellation with a reason",
+      "Verify the organizer dashboard shows Menunggu pembatalan and does not offer another cancellation request",
+      "Verify the event remains visible in the active catalog until admin review",
+      "Sign in as admin and approve the cancellation with a note",
+      "Verify the event disappears from active agenda and appears in Arsip Acara as Dibatalkan",
+      "Open its public detail and verify the cancellation notice and history remain visible",
+      "Repeat with another published event using the admin direct-cancellation action"
+    ],
+    "expected": "Cancellation requests require a reason, admins can approve or reject them, admins can directly cancel published events, cancelled events are excluded from the active catalog but retained in the public archive and event history, and the mobile interface remains usable."
+  }
+]
